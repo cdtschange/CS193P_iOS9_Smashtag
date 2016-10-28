@@ -9,7 +9,14 @@
 import UIKit
 import Twitter
 
-class TweetTableViewController: UITableViewController {
+class TweetTableViewController: UITableViewController, UITextFieldDelegate {
+    
+    @IBOutlet weak var searchTextField: UITextField! {
+        didSet {
+            searchTextField.delegate = self
+            searchTextField.text = searchText
+        }
+    }
     
     var tweets = [Array<Twitter.Tweet>]() {
         didSet {
@@ -93,6 +100,11 @@ class TweetTableViewController: UITableViewController {
         return cell
     }
     
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        searchText = textField.text
+        return true
+    }
 
     /*
     // Override to support conditional editing of the table view.
