@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="g8n-1b-yHo">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="uME-R7-ofE">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -16,7 +16,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Tweet" rowHeight="152" id="Nd6-7H-fzz" customClass="TweetTableViewCell" customModule="Smashtag" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="600" height="152"/>
+                                <rect key="frame" x="0.0" y="92" width="600" height="152"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Nd6-7H-fzz" id="0dJ-fc-TXQ">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="152"/>
@@ -83,8 +83,27 @@
                             <outlet property="delegate" destination="g8n-1b-yHo" id="Md4-Nx-lyZ"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="m81-TO-kPO"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l0J-3K-zLH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1471" y="662"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Gy8-W8-uit">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="uME-R7-ofE" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="d3s-S5-5fa">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="g8n-1b-yHo" kind="relationship" relationship="rootViewController" id="6kr-Lj-7aA"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2hM-ww-6i5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="659" y="662"/>
         </scene>

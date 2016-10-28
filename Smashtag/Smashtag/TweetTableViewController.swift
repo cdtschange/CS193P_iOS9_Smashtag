@@ -52,6 +52,8 @@ class TweetTableViewController: UITableViewController {
         super.viewDidLoad()
         
         searchText = "#stanford"
+        tableView.estimatedRowHeight = tableView.rowHeight
+        tableView.rowHeight = UITableViewAutomaticDimension
 
     }
 
