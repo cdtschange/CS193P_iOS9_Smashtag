@@ -8,8 +8,13 @@
 
 import UIKit
 import Twitter
+import CoreData
 
 class TweetTableViewController: UITableViewController, UITextFieldDelegate {
+    
+    // MARK: Model
+    
+    var managedObjectContext: NSManagedObjectContext? = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
     
     @IBOutlet weak var searchTextField: UITextField! {
         didSet {
@@ -48,10 +53,38 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
                     if request == weakSelf?.lastTwitterRequest {
                         if !newTweets.isEmpty {
                             weakSelf?.tweets.insert(newTweets, atIndex: 0)
+                            weakSelf?.updateDatabase(newTweets)
                         }
                     }
                 }
             }
+        }
+    }
+    
+    private func updateDatabase(newTweets: [Twitter.Tweet]) {
+        managedObjectContext?.performBlock {
+            for twitterInfo in newTweets {
+                // create a new, unique Tweet
+                _ = Tweet.tweetWithTwitterInfo(twitterInfo, inManagedObjectContext: self.managedObjectContext!)
+            }
+            do {
+                try self.managedObjectContext?.save()
+            } catch let error {
+                print("Core Data Error: \(error)")
+            }
+        }
+        printDatabaseStatistics()
+        print("done printing database statistics")
+    }
+    
+    private func printDatabaseStatistics() {
+        managedObjectContext?.performBlock {
+            if let results = try? self.managedObjectContext!.executeFetchRequest(NSFetchRequest(entityName: "TwitterUser")) {
+                print("\(results.count) TwitterUsers")
+            }
+            // a more efficient way to count objects ...
+            let tweetCount = self.managedObjectContext!.countForFetchRequest(NSFetchRequest(entityName: "Tweet"), error: nil)
+            print("\(tweetCount) Tweets")
         }
     }
 
