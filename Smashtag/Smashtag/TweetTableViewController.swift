@@ -56,8 +56,11 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
                             weakSelf?.updateDatabase(newTweets)
                         }
                     }
+                    weakSelf?.refreshControl?.endRefreshing()
                 }
             }
+        } else {
+            self.refreshControl?.endRefreshing()
         }
     }
     
@@ -87,6 +90,20 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
             print("\(tweetCount) Tweets")
         }
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "TweetersMentioningSearchTerm" {
+            if let tweetersTVC = segue.destinationViewController as? TweetersTableViewController {
+                tweetersTVC.mention = searchText
+                tweetersTVC.managedObjectContext = managedObjectContext
+            }
+        }
+    }
+    
+    @IBAction func refresh(sender: UIRefreshControl) {
+        searchForTweets()
+    }
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
